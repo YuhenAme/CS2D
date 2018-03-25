@@ -13,12 +13,6 @@ public class PlayerControll : MonoBehaviour {
     private Sprite humanSprite;
 
     /// <summary>
-    /// 枪械的贴图
-    /// </summary>
-    [SerializeField]
-    private Sprite gunSprite;
-
-    /// <summary>
     /// 人物自身血量
     /// </summary>
     [SerializeField]
@@ -33,10 +27,40 @@ public class PlayerControll : MonoBehaviour {
     /// <summary>
     /// 人物所需刚体
     /// </summary>
-    public Rigidbody2D playerRigid;
-    
-    //人物所持有的枪械
-    //public Gun gun;
+    private Rigidbody2D playerRigid;
+
+    /// <summary>
+    /// 枪的枚举类型
+    /// </summary>
+    private enum GunType
+    {
+        ak47,
+        aug,
+        deagle,
+        famas,
+        galil,
+        mp5,
+        p90,
+        scout,
+        xm1014,
+        usp
+    }
+
+    /// <summary>
+    /// 当前枪械状态
+    /// </summary>
+    [SerializeField]
+    private GunType gunType;
+
+    /// <summary>
+    /// 人物的攻击力
+    /// </summary>
+    private int attackForce;
+
+    /// <summary>
+    /// 人物的攻击间隔
+    /// </summary>
+    private float attackTime;
     
 
 
@@ -90,16 +114,49 @@ public class PlayerControll : MonoBehaviour {
     /// </summary>
     private void Attack()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
             //实例化子弹
-            //获得子弹的攻击力，攻击间隔时间
+            //根据枪械的种类来调用对应枪的shoot()方法
+            switch (gunType)
+            {
+                case GunType.ak47:
+                    GameObject.Find("ak47").GetComponent<Ak47>().Shoot();
+                    break;
+                case GunType.aug:
+                    GameObject.Find("aug").GetComponent<Aug>().Shoot();
+                    break;
+                case GunType.deagle:
+                    GameObject.Find("deagle").GetComponent<Deagle>().Shoot();
+                    break;
+                case GunType.famas:
+                    Debug.Log("OK");
+                    break;
+                case GunType.galil:
+                    Debug.Log("OK");
+                    break;
+            }
+        
+    }
+
+    /// <summary>
+    /// 更改玩家所持枪械状态
+    /// </summary>
+    private void ChangeState(GunType g)
+    {
+        if (gunType != g)
+        {
+            gunType = g;
+        }
+        else
+        {
+            return;
         }
     }
+
 
     void Start () {
         playerRigid = GetComponent<Rigidbody2D>();
         GetComponent<SpriteRenderer>().sprite = humanSprite;
+        gunType = GunType.ak47;
 	}
 	
 	// Update is called once per frame

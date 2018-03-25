@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Test : MonoBehaviour {
 
-    public float timer ;
+    public float timer =3;
+    
 
     void Update()
     {

@@ -82,6 +82,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Ak47.cs" />
+    <Compile Include="Assets\Scripts\Aug.cs" />
+    <Compile Include="Assets\Scripts\Deagle.cs" />
+    <Compile Include="Assets\Scripts\Famas.cs" />
     <Compile Include="Assets\Scripts\Gun.cs" />
     <Compile Include="Assets\Scripts\PlayerControll.cs" />
     <Compile Include="Assets\Scripts\Test\Test.cs" />

@@ -13,36 +13,86 @@ public abstract class Gun : MonoBehaviour {
     /// </summary>
     [SerializeField]
     protected int attackForce;
+    public int AttackForce
+    {
+        get
+        {
+           return attackForce;
+        }
+        set
+        {
+            attackForce = value;
+        }
+    }
 
     /// <summary>
     /// 武器的攻击间隔时间
     /// </summary>
     [SerializeField]
     private  float attackTime;
-
-    /// <summary>
-    /// 对应的武器贴图
-    /// </summary>
-    [SerializeField]
-    private Sprite gunSprite;
+    public float AttackTime
+    {
+        get
+        {
+            return attackTime;
+        }
+        set
+        {
+            attackTime = value;
+        }
+    }
 
     /// <summary>
     /// 武器的子弹发射位置
     /// </summary>
     [SerializeField]
     private Transform shootPos;
+    public Transform ShootPos
+    {
+        get
+        {
+            return shootPos;
+        }
+        set
+        {
+            shootPos = value;
+        }
+    }
 
     /// <summary>
     /// 子弹的限制数
     /// </summary>
     [SerializeField]
     private int maxShoot;
+    public int MaxShoot
+    {
+        get
+        {
+            return maxShoot;
+        }
+        set
+        {
+            maxShoot = value;
+        }
+    }
 
     /// <summary>
     /// 子弹
     /// </summary>
     [SerializeField]
     private GameObject shootObj;
+    public GameObject ShootObj
+    {
+        get
+        {
+            return shootObj;
+        }
+        set
+        {
+            shootObj = value;
+        }
+    }
+
 
 
     //方法---------------------
@@ -50,53 +100,27 @@ public abstract class Gun : MonoBehaviour {
     /// 射击方法
     /// </summary>
     /// <param name="attacktime">射击具体的间隔时间</param>
-    protected  void Shoot(float time)
-    {
-        time = attackTime;
-        //GameObject clone = Instantiate(shoot, shootPos.position, shootPos.rotation);
-        //Rigidbody2D cloneRigid = clone.GetComponent<Rigidbody2D>();
-        //设置攻击间隔
-        attackTime -= Time.deltaTime;
-        if (attackTime <= 0)
-        {
-            attackTime = time;
-            GameObject clone = Instantiate(shootObj, shootPos.position, shootPos.rotation);
-            Rigidbody2D cloneRigid = clone.GetComponent<Rigidbody2D>();
-           //设置子弹的速度
-            cloneRigid.velocity = transform.TransformDirection(Vector3.forward* 10);
-        }
-
-    }
+    public abstract void Shoot();
+    //{
+    //    //float time = GetComponent<Gun>().GetAttackTime();
+    //    ////设置攻击间隔
+    //    //time -= Time.deltaTime;
+    //    //if (attackTime <= 0)
+    //    //{
+    //    //    time= GetComponent<Gun>().GetAttackTime();
+    //    //    GameObject clone = Instantiate(shootObj, shootPos.position, shootPos.rotation);
+    //    //    Rigidbody2D cloneRigid = clone.GetComponent<Rigidbody2D>();
+    //    //   //设置子弹的速度
+    //    //    cloneRigid.velocity = transform.TransformDirection(Vector3.forward* 10);
+    //    //}
+    //    Debug.Log("done");
+    //}
 
 
-    public void SetAttackForce(int aF)
-    {
-        attackForce = aF;
-    }
-    public void SetAttackTime(float aT)
-    {
-        attackTime = aT;
-    }
-    public void SetGunSprite(Sprite gunS)
-    {
-        gunSprite = gunS;
-    }
-    public void SetShootPos(Transform shootP)
-    {
-        shootPos = shootP;
-    }
-    public void SetMaxShoot(int max)
-    {
-        maxShoot = max;
-    }
-    public void SetShootObj(GameObject shoot)
-    {
-        shootObj = shoot;
-    }
 
-    void Start()
+void Start()
     {
-        shootPos = GameObject.Find("shootPos").transform;
+        //shootPos = GameObject.Find("shootPos").transform;
     }
 
 
