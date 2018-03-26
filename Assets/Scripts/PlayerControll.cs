@@ -50,17 +50,17 @@ public class PlayerControll : MonoBehaviour {
     /// 当前枪械状态
     /// </summary>
     [SerializeField]
-    private GunType gunType;
+    private static GunType gunType;
 
-    /// <summary>
-    /// 人物的攻击力
-    /// </summary>
-    private int attackForce;
+    ///// <summary>
+    ///// 人物的攻击力
+    ///// </summary>
+    //private int attackForce;
 
-    /// <summary>
-    /// 人物的攻击间隔
-    /// </summary>
-    private float attackTime;
+    ///// <summary>
+    ///// 人物的攻击间隔
+    ///// </summary>
+    //private float attackTime;
     
 
 
@@ -128,12 +128,27 @@ public class PlayerControll : MonoBehaviour {
                     GameObject.Find("deagle").GetComponent<Deagle>().Shoot();
                     break;
                 case GunType.famas:
-                    Debug.Log("OK");
+                    GameObject.Find("famas").GetComponent<Famas>().Shoot();
                     break;
                 case GunType.galil:
-                    Debug.Log("OK");
+                    GameObject.Find("galil").GetComponent<Galil>().Shoot();
                     break;
-            }
+                case GunType.mp5:
+                    GameObject.Find("mp5").GetComponent<Mp5>().Shoot();
+                    break;
+                case GunType.p90:
+                    GameObject.Find("p90").GetComponent<P90>().Shoot();
+                    break;
+                case GunType.scout:
+                    GameObject.Find("scout").GetComponent<Scout>().Shoot();
+                    break;
+                case GunType.usp:
+                    GameObject.Find("usp").GetComponent<Usp>().Shoot();
+                    break;
+                case GunType.xm1014:
+                    GameObject.Find("xm1014").GetComponent<Xm1014>().Shoot();
+                    break;
+        }
         
     }
 
@@ -144,12 +159,18 @@ public class PlayerControll : MonoBehaviour {
     {
         if (gunType != g)
         {
+            GameObject.Find(gunType.ToString()).SetActive(false);
             gunType = g;
+            //找到对应的子物体并将其置为可见
+            this.gameObject.transform.Find(gunType.ToString()).gameObject.SetActive(true);
+            //Debug.Log(gunType.ToString());
+
         }
         else
         {
             return;
         }
+
     }
 
 
@@ -166,5 +187,28 @@ public class PlayerControll : MonoBehaviour {
         Hurt();
         Attack();
     }
+
+    /// <summary>
+    /// 碰撞检测，玩家更换枪械//等待添加切换枪械的条件
+    /// </summary>
+    /// <param name="collision">枪的碰撞体</param>
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (gunType.ToString() + "_d" != collision.gameObject.name)
+        {
+            GunType t;
+            for (t = GunType.ak47; t <= GunType.usp; t++)
+            {
+                if (t.ToString() + "_d" == collision.gameObject.name)
+                {
+                    break;
+                }
+            }
+            //Debug.Log(t.ToString());
+
+            ChangeState(t);
+        }
+    }
+
 
 }

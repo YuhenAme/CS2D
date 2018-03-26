@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Famas : Gun {
+
+
     public override void Shoot()
     {
         GetComponent<Famas>().AttackTime -= Time.deltaTime;

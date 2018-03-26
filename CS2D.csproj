@@ -85,9 +85,15 @@
     <Compile Include="Assets\Scripts\Aug.cs" />
     <Compile Include="Assets\Scripts\Deagle.cs" />
     <Compile Include="Assets\Scripts\Famas.cs" />
+    <Compile Include="Assets\Scripts\Galil.cs" />
     <Compile Include="Assets\Scripts\Gun.cs" />
+    <Compile Include="Assets\Scripts\Mp5.cs" />
+    <Compile Include="Assets\Scripts\P90.cs" />
     <Compile Include="Assets\Scripts\PlayerControll.cs" />
+    <Compile Include="Assets\Scripts\Scout.cs" />
     <Compile Include="Assets\Scripts\Test\Test.cs" />
+    <Compile Include="Assets\Scripts\Usp.cs" />
+    <Compile Include="Assets\Scripts\Xm1014.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

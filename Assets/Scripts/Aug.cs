@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Aug : Gun {
+
+
+    /// <summary>
+    /// 该枪械的射击方法
+    /// </summary>
     public override void Shoot()
     {
         GetComponent<Aug>().AttackTime -= Time.deltaTime;
@@ -12,7 +17,7 @@ public class Aug : Gun {
             if (GetComponent<Aug>().AttackTime <= 0)
             {
                 GetComponent<Aug>().AttackTime = 0.7f;
-                Debug.Log("done");
+                Debug.Log("ok");
             }
         }
     }
@@ -23,6 +28,7 @@ public class Aug : Gun {
     /// </summary>    
     private void Init()
     {
+        
         GetComponent<Aug>().MaxShoot = 150;
         GetComponent<Aug>().AttackForce = 15;
         GetComponent<Aug>().AttackTime = 0.7f;
@@ -33,8 +39,5 @@ public class Aug : Gun {
         Init();
 	}
 	
-	// Update is called once per frame
-	//void Update () {
-		
-	//}
+	
 }
