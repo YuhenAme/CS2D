@@ -10,12 +10,22 @@ public class P90 : Gun {
     public override void Shoot()
     {
         GetComponent<P90>().AttackTime -= Time.deltaTime;
-        if (Input.GetMouseButtonDown(0))
+        if(GetComponent<P90>().MaxShoot>0)
         {
-            if (GetComponent<P90>().AttackTime <= 0)
+            if (Input.GetMouseButtonDown(0))
             {
-                GetComponent<P90>().AttackTime = 0.4f;
-                Debug.Log("ok");
+                if (GetComponent<P90>().AttackTime <= 0)
+                {
+                    GetComponent<P90>().AttackTime = 0.4f;
+                    //Debug.Log("ok");
+                    GameObject clone = Instantiate(GetComponent<P90>().ShootObj, GetComponent<P90>().ShootPos.position, GetComponent<P90>().ShootPos.rotation);
+                    clone.name = "p90Buttle";
+                    GetComponent<P90>().MaxShoot--;
+                }
+            }
+            else
+            {
+                return;
             }
         }
     }

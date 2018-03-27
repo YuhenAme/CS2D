@@ -9,14 +9,25 @@ public class Famas : Gun {
     public override void Shoot()
     {
         GetComponent<Famas>().AttackTime -= Time.deltaTime;
-        if (Input.GetMouseButtonDown(0))
+        if (GetComponent<Famas>().MaxShoot > 0)
         {
-            if (GetComponent<Famas>().AttackTime <= 0)
+            if (Input.GetMouseButtonDown(0))
             {
-                GetComponent<Famas>().AttackTime = 1.6f;
-                Debug.Log("done");
+                if (GetComponent<Famas>().AttackTime <= 0)
+                {
+                    GetComponent<Famas>().AttackTime = 1.6f;
+                    //Debug.Log("done");
+                    GameObject clone = Instantiate(GetComponent<Famas>().ShootObj, GetComponent<Famas>().ShootPos.position, GetComponent<Famas>().ShootPos.rotation);
+                    clone.name = "famasButtle";
+                    GetComponent<Famas>().MaxShoot--;
+                }
+            }
+            else
+            {
+                return;
             }
         }
+        
     }
 
     /// <summary>

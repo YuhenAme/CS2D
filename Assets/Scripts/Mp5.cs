@@ -10,12 +10,21 @@ public class Mp5 : Gun {
     public override void Shoot()
     {
         GetComponent<Mp5>().AttackTime -= Time.deltaTime;
-        if (Input.GetMouseButtonDown(0))
+        if(GetComponent<Mp5>().MaxShoot>0)
         {
-            if (GetComponent<Mp5>().AttackTime <= 0)
+            if (Input.GetMouseButtonDown(0))
             {
-                GetComponent<Mp5>().AttackTime = 0.4f;
-                Debug.Log("ok");
+                if (GetComponent<Mp5>().AttackTime <= 0)
+                {
+                    GetComponent<Mp5>().AttackTime = 0.4f;
+                    GameObject clone = Instantiate(GetComponent<Mp5>().ShootObj, GetComponent<Mp5>().ShootPos.position, GetComponent<Mp5>().ShootPos.rotation);
+                    clone.name = "mp5Buttle";
+                    GetComponent<Mp5>().MaxShoot--;
+                }
+            }
+            else
+            {
+                return;
             }
         }
     }

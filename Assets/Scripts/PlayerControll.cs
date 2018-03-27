@@ -106,6 +106,40 @@ public class PlayerControll : MonoBehaviour {
     private void Hurt(GunType gunBullet)
     {
         //受到伤害
+        //Debug.Log(gunBullet.ToString());
+        switch (gunBullet)
+        {
+            case GunType.ak47://Debug.Log(gunBullet.ToString());
+                hp -= 15;
+                break;
+            case GunType.aug:
+                hp -= 15;
+                break;
+            case GunType.deagle:
+                hp -= 9;
+                break;
+            case GunType.famas:
+                hp -= 25;
+                break;
+            case GunType.galil:
+                hp -= 25;
+                break;
+            case GunType.mp5:
+                hp -= 10;
+                break;
+            case GunType.p90:
+                hp -= 9;
+                break;
+            case GunType.scout:
+                hp -= 35;
+                break;
+            case GunType.usp:
+                hp -= 9;
+                break;
+            case GunType.xm1014:
+                hp -= 30;
+                break;
+        }
      
     }
     /// <summary>
@@ -161,7 +195,7 @@ public class PlayerControll : MonoBehaviour {
             GameObject.Find(gunType.ToString()).SetActive(false);
             gunType = g;
             //找到对应的子物体并将其置为可见
-            Debug.Log(gunType.ToString());
+            //Debug.Log(gunType.ToString());
             this.gameObject.transform.Find(gunType.ToString()).gameObject.SetActive(true);
 
         }
@@ -201,11 +235,27 @@ public class PlayerControll : MonoBehaviour {
     }
 
     /// <summary>
-    /// 碰撞检测，玩家更换枪械//等待添加切换枪械的条件
+    /// 玩家更换枪械，受到伤害等的碰撞检测
     /// </summary>
     /// <param name="collision">枪的碰撞体</param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //与子弹发生碰撞
+        //子弹类型
+        GunType gunbullet;
+        //与子弹发生碰撞
+        for (gunbullet = GunType.ak47; gunbullet <= GunType.usp; gunbullet++)
+        {
+            //Debug.Log("d");
+            if (gunbullet.ToString() + "Buttle" == collision.gameObject.name)
+            {
+                break;
+            }
+        }
+        Hurt(gunbullet);
+
+
+        //与枪械发生碰撞(更换枪械)
         if (gunType.ToString() + "_d" != collision.gameObject.name)
         {
             GunType t;
@@ -216,21 +266,14 @@ public class PlayerControll : MonoBehaviour {
                     break;//如果没有找到则t结束循环时t会等于10
                 }
             }
+            //如果未检测到相应的枪械的碰撞体则不改变枪的状态
+            if (t > GunType.usp)
+            {
+                t = gunType;
+            }
             //Debug.Log(t.ToString());
             ChangeState(t);
         }
-
-
-        //GunType gunbullet;
-        ////与子弹发生碰撞,有问题
-        //for (gunbullet = GunType.ak47; gunbullet <= GunType.usp; gunbullet++)
-        //{
-        //    if (gunbullet.ToString() + "Buttle" == collision.gameObject.name)
-        //    {
-        //        break;
-        //    }
-        //    Hurt(gunbullet);
-        //}
     }
 
 

@@ -10,12 +10,21 @@ public class Scout : Gun {
     public override void Shoot()
     {
         GetComponent<Scout>().AttackTime -= Time.deltaTime;
-        if (Input.GetMouseButtonDown(0))
+        if(GetComponent<Scout>().MaxShoot>0)
         {
-            if (GetComponent<Scout>().AttackTime <= 0)
+            if (Input.GetMouseButtonDown(0))
             {
-                GetComponent<Scout>().AttackTime = 1.7f;
-                Debug.Log("ok");
+                if (GetComponent<Scout>().AttackTime <= 0)
+                {
+                    GetComponent<Scout>().AttackTime = 1.7f;
+                    GameObject clone = Instantiate(GetComponent<Scout>().ShootObj, GetComponent<Scout>().ShootPos.position, GetComponent<Scout>().ShootPos.rotation);
+                    clone.name = "scoutButtle";
+                    GetComponent<Scout>().MaxShoot--;
+                }
+            }
+            else
+            {
+                return;
             }
         }
     }

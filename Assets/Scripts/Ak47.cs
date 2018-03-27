@@ -5,20 +5,26 @@ using UnityEngine;
 
 public class Ak47 : Gun {
 
+    //private Rigidbody2D cloneRigid;
     public override void Shoot()
     {
         GetComponent<Ak47>().AttackTime -= Time.deltaTime;
-        if (Input.GetMouseButtonDown(0))
+        if (GetComponent<Ak47>().MaxShoot > 0)
         {
-            if (GetComponent<Ak47>().AttackTime <= 0)
+            if (Input.GetMouseButtonDown(0))
             {
-                GetComponent<Ak47>().AttackTime = 0.6f;
-                Debug.Log("done");
+                if (GetComponent<Ak47>().AttackTime <= 0)
+                {
+                    GetComponent<Ak47>().AttackTime = 0.6f;
+                    GameObject clone = Instantiate(GetComponent<Ak47>().ShootObj, GetComponent<Ak47>().ShootPos.position, GetComponent<Ak47>().ShootPos.rotation);
+                    clone.name = "ak47Buttle";
+                    GetComponent<Ak47>().MaxShoot--;
+                }
             }
-        }
-        else
-        {
-            return;
+            else
+            {
+                return;
+            }
         }
     }
 
@@ -36,12 +42,9 @@ public class Ak47 : Gun {
     // Use this for initialization
     void Start () {
         Init();
-        float a = GetComponent<Ak47>().AttackTime;
+        //float a = GetComponent<Ak47>().AttackTime;
     }
 	
-	// Update is called once per frame
-	//void Update () {
-        
-	//}
+	
    
 }

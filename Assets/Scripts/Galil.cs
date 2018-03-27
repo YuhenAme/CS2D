@@ -10,14 +10,20 @@ public class Galil : Gun {
     public override void Shoot()
     {
         GetComponent<Galil>().AttackTime -= Time.deltaTime;
-        if (Input.GetMouseButtonDown(0))
+        if (GetComponent<Galil>().MaxShoot > 0)
         {
-            if (GetComponent<Galil>().AttackTime <= 0)
+            if (Input.GetMouseButtonDown(0))
             {
-                GetComponent<Galil>().AttackTime = 0.7f;
-                Debug.Log("ok");
+                if (GetComponent<Galil>().AttackTime <= 0)
+                {
+                    GetComponent<Galil>().AttackTime = 0.7f;
+                    GameObject clone = Instantiate(GetComponent<Galil>().ShootObj, GetComponent<Galil>().ShootPos.position, GetComponent<Galil>().ShootPos.rotation);
+                    clone.name = "galilButtle";
+                    GetComponent<Galil>().MaxShoot--;
+                }
             }
         }
+        
     }
 
     /// <summary>

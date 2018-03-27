@@ -12,14 +12,24 @@ public class Aug : Gun {
     public override void Shoot()
     {
         GetComponent<Aug>().AttackTime -= Time.deltaTime;
-        if (Input.GetMouseButtonDown(0))
+        if (GetComponent<Aug>().MaxShoot > 0)
         {
-            if (GetComponent<Aug>().AttackTime <= 0)
+            if (Input.GetMouseButtonDown(0))
             {
-                GetComponent<Aug>().AttackTime = 0.7f;
-                Debug.Log("ok");
+                if (GetComponent<Aug>().AttackTime <= 0)
+                {
+                    GetComponent<Aug>().AttackTime = 0.7f;
+                    GameObject clone = Instantiate(GetComponent<Aug>().ShootObj, GetComponent<Aug>().ShootPos.position, GetComponent<Aug>().ShootPos.rotation);
+                    clone.name = "augButtle";
+                    GetComponent<Aug>().MaxShoot--;
+                }
+            }
+            else
+            {
+                return;
             }
         }
+        
     }
 
 

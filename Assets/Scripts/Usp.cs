@@ -10,12 +10,22 @@ public class Usp : Gun {
     public override void Shoot()
     {
         GetComponent<Usp>().AttackTime -= Time.deltaTime;
-        if (Input.GetMouseButtonDown(0))
+        if (GetComponent<Usp>().MaxShoot > 0)
         {
-            if (GetComponent<Usp>().AttackTime <= 0)
+            if (Input.GetMouseButtonDown(0))
             {
-                GetComponent<Usp>().AttackTime = 1.0f;
-                Debug.Log("ok");
+                if (GetComponent<Usp>().AttackTime <= 0)
+                {
+                    GetComponent<Usp>().AttackTime = 1.0f;
+                    //Debug.Log("ok");
+                    GameObject clone = Instantiate(GetComponent<Usp>().ShootObj, GetComponent<Usp>().ShootPos.position, GetComponent<Usp>().ShootPos.rotation);
+                    clone.name = "uspButtle";
+                    GetComponent<Usp>().MaxShoot--;
+                }
+            }
+            else
+            {
+                return;
             }
         }
     }
