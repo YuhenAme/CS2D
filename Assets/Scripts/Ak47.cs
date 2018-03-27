@@ -16,6 +16,10 @@ public class Ak47 : Gun {
                 Debug.Log("done");
             }
         }
+        else
+        {
+            return;
+        }
     }
 
     /// <summary>

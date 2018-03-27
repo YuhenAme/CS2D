@@ -13,6 +13,18 @@ public class PlayerControll : MonoBehaviour {
     private Sprite humanSprite;
 
     /// <summary>
+    /// 人物死亡的贴图
+    /// </summary>
+    [SerializeField]
+    private Sprite diedSprite;
+
+    /// <summary>
+    /// 人物是否存活的状态
+    /// </summary>
+    [SerializeField]
+    private bool isAlive;
+
+    /// <summary>
     /// 人物自身血量
     /// </summary>
     [SerializeField]
@@ -52,15 +64,6 @@ public class PlayerControll : MonoBehaviour {
     [SerializeField]
     private static GunType gunType;
 
-    ///// <summary>
-    ///// 人物的攻击力
-    ///// </summary>
-    //private int attackForce;
-
-    ///// <summary>
-    ///// 人物的攻击间隔
-    ///// </summary>
-    //private float attackTime;
     
 
 
@@ -100,14 +103,10 @@ public class PlayerControll : MonoBehaviour {
     /// <summary>
     /// 人物受伤
     /// </summary>
-    private void Hurt()
+    private void Hurt(GunType gunBullet)
     {
         //受到伤害
-        if (hp <= 0)
-        {
-            //人物死亡
-        }
-       
+     
     }
     /// <summary>
     /// 人物攻击
@@ -162,8 +161,8 @@ public class PlayerControll : MonoBehaviour {
             GameObject.Find(gunType.ToString()).SetActive(false);
             gunType = g;
             //找到对应的子物体并将其置为可见
+            Debug.Log(gunType.ToString());
             this.gameObject.transform.Find(gunType.ToString()).gameObject.SetActive(true);
-            //Debug.Log(gunType.ToString());
 
         }
         else
@@ -178,14 +177,27 @@ public class PlayerControll : MonoBehaviour {
         playerRigid = GetComponent<Rigidbody2D>();
         GetComponent<SpriteRenderer>().sprite = humanSprite;
         gunType = GunType.ak47;
+        isAlive = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        LookTo();
-        Move();
-        Hurt();
-        Attack();
+        if (hp> 0)
+        {
+            LookTo();
+            Move();
+            Attack();
+        }
+        else
+        {
+            //人物死亡
+            isAlive = false;
+            //更换人物的贴图为死亡贴图
+            GetComponent<SpriteRenderer>().sprite = diedSprite;
+            //将子物体置为不可见
+            this.gameObject.transform.Find(gunType.ToString()).gameObject.SetActive(false);
+            
+        }
     }
 
     /// <summary>
@@ -201,14 +213,29 @@ public class PlayerControll : MonoBehaviour {
             {
                 if (t.ToString() + "_d" == collision.gameObject.name)
                 {
-                    break;
+                    break;//如果没有找到则t结束循环时t会等于10
                 }
             }
             //Debug.Log(t.ToString());
-
             ChangeState(t);
         }
+
+
+        //GunType gunbullet;
+        ////与子弹发生碰撞,有问题
+        //for (gunbullet = GunType.ak47; gunbullet <= GunType.usp; gunbullet++)
+        //{
+        //    if (gunbullet.ToString() + "Buttle" == collision.gameObject.name)
+        //    {
+        //        break;
+        //    }
+        //    Hurt(gunbullet);
+        //}
     }
+
+
+   
+
 
 
 }
