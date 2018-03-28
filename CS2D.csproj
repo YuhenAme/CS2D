@@ -234,9 +234,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AI.cs" />
     <Compile Include="Assets\Scripts\Ak47.cs" />
     <Compile Include="Assets\Scripts\Aug.cs" />
     <Compile Include="Assets\Scripts\Buttle.cs" />
+    <Compile Include="Assets\Scripts\CameraControll.cs" />
     <Compile Include="Assets\Scripts\Deagle.cs" />
     <Compile Include="Assets\Scripts\Famas.cs" />
     <Compile Include="Assets\Scripts\Galil.cs" />
