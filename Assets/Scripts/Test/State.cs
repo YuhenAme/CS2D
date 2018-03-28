@@ -16,26 +16,28 @@ public class State : MonoBehaviour
 
         while (true)
         {
-            Debug.Log("01");
+            Debug.Log("移动");
             //Update
+            //StartCoroutine(State02());
             yield return 0;
-            if (Input.GetMouseButtonDown(0))
-            {
-                StartCoroutine(State02());
-                break;
-            }
+            //if (Input.GetMouseButtonDown(0))
+            //{
+            //    StartCoroutine(State02());
+            //    break;
+            //}
         }
 
         //Exit
         //...
 
-        StartCoroutine(State01());
+        //StartCoroutine(State01());
     }
 
     private IEnumerator State02()
     {
         //Enter
         //...
+
 
         while (true)
         {
@@ -52,7 +54,7 @@ public class State : MonoBehaviour
         //Exit
         //...
 
-        StartCoroutine(State02());
+        //StartCoroutine(State02());
     }
     private IEnumerator State03()
     {
