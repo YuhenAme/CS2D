@@ -1,8 +1,29 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class P90 : Gun {
+    public override void AIShoot()
+    {
+        GetComponent<P90>().AttackTime -= Time.deltaTime;
+        if (GetComponent<P90>().MaxShoot > 0)
+        {
+            if (GetComponent<P90>().AttackTime <= 0)
+            {
+                GetComponent<P90>().AttackTime = 0.4f;
+                //Debug.Log("ok");
+                GameObject clone = Instantiate(GetComponent<P90>().ShootObj, GetComponent<P90>().ShootPos.position, GetComponent<P90>().ShootPos.rotation);
+                clone.name = "p90Buttle";
+                GetComponent<P90>().MaxShoot--;
+            }
+            else
+            {
+                return;
+            }
+        }
+            
+    }
 
     /// <summary>
     /// 该枪械的射击方法

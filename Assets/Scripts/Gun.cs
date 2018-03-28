@@ -101,20 +101,11 @@ public abstract class Gun : MonoBehaviour {
     /// </summary>
     /// <param name="attacktime">射击具体的间隔时间</param>
     public abstract void Shoot();
-    //{
-    //    //float time = GetComponent<Gun>().GetAttackTime();
-    //    ////设置攻击间隔
-    //    //time -= Time.deltaTime;
-    //    //if (attackTime <= 0)
-    //    //{
-    //    //    time= GetComponent<Gun>().GetAttackTime();
-    //    //    GameObject clone = Instantiate(shootObj, shootPos.position, shootPos.rotation);
-    //    //    Rigidbody2D cloneRigid = clone.GetComponent<Rigidbody2D>();
-    //    //   //设置子弹的速度
-    //    //    cloneRigid.velocity = transform.TransformDirection(Vector3.forward* 10);
-    //    //}
-    //    Debug.Log("done");
-    //}
+
+    /// <summary>
+    /// AI的射击方法
+    /// </summary>
+    public abstract void AIShoot();
 
 
 

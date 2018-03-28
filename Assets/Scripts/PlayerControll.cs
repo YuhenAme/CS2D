@@ -77,7 +77,7 @@ public class PlayerControll : MonoBehaviour {
     {
         //获取鼠标的坐标，鼠标是屏幕坐标，Z轴为0，这里不做转换  
         Vector3 mouse = Input.mousePosition;
-        //获取物体坐标，物体坐标是世界坐标，将其转换成屏幕坐标，和鼠标一直  
+        //获取物体坐标，物体坐标是世界坐标，将其转换成屏幕坐标，和鼠标一致  
         Vector3 obj = Camera.main.WorldToScreenPoint(transform.position);
         //屏幕坐标向量相减，得到指向鼠标点的目标向量  
         Vector3 direction = mouse - obj;

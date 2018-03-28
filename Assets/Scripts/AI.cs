@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +14,7 @@ public class AI : MonoBehaviour {
     /// AI的血量
     /// </summary>
     [SerializeField]
-    private int hp;
+    private int hp = 100;
 
     /// <summary>
     /// AI的贴图
@@ -38,6 +37,7 @@ public class AI : MonoBehaviour {
     /// <summary>
     /// 枪的枚举类型
     /// </summary>
+    [SerializeField]
     private enum GunType
     {
         ak47,
@@ -67,7 +67,6 @@ public class AI : MonoBehaviour {
         move,
         rotate,
         idle,
-        chase,
         shoot,
     }
 
@@ -82,6 +81,12 @@ public class AI : MonoBehaviour {
     /// </summary>
     [SerializeField]
     private State state;
+
+    /// <summary>
+    /// 死亡的贴图
+    /// </summary>
+    [SerializeField]
+    private Sprite diedSprite;
 
 
     /// <summary>
@@ -179,49 +184,182 @@ public class AI : MonoBehaviour {
         {
             //判断敌人与主角之间的距离
             float distance = Vector3.Distance(go.transform.position, transform.position);
-            if (distance <= 3)
+            if (distance <= 2)
             {
-                if (distance <= 2)
-                {
-                    setAIState(State.shoot);
-                }
-                else
-                {
-                    setAIState(State.chase);
-                }
-                
+                //使Enemy朝向目标
+                Vector3 goPos = go.transform.position;
+                Vector3 obj = transform.position;
+                Vector3 direction = goPos - obj;
+                direction.z = 0f;
+                direction = direction.normalized;
+                transform.up = direction;
+
+                setAIState(State.shoot);
             }
+
         }
 
             switch (state)
         {
             case State.move:
-                Debug.Log("move");
+                //Debug.Log("move");
+                Move();
                 break;
             case State.rotate:
-                Debug.Log("rotate");
+                //Debug.Log("rotate");
+                Rotate();
                 break;
             case State.idle:
-                Debug.Log("idle");
-                break;
-            case State.chase:
-                Debug.Log("chase");
+                //Debug.Log("idle");
+                Idle();
                 break;
             case State.shoot:
-                Debug.Log("shoot");
+                //Debug.Log("shoot");
+                Shoot();
                 break;
             
         }
     }
 
 
+    /// <summary>
+    /// 移动方法
+    /// </summary>
+    private void Move()
+    {
+        Debug.Log("move");
+        aiRigid.velocity= transform.TransformDirection(Vector3.up * 0.5f);
+    }
+    /// <summary>
+    /// 转向方法
+    /// </summary>
+    private void Rotate()
+    {
+        Debug.Log("rotate");
+        transform.Rotate(new Vector3(0, 0, 10) * Time.deltaTime);
+    }
+    /// <summary>
+    /// 静止状态
+    /// </summary>
+    private void Idle()
+    {
+        aiRigid.velocity = new Vector2(0, 0);
+        Debug.Log("idle");
+    }
+    /// <summary>
+    /// 攻击方法
+    /// </summary>
+    private void Shoot()
+    {
+        Debug.Log("shoot");
+        //transform.LookAt()
+       
+        GameObject.Find("ak470").GetComponent<Ak47>().AIShoot();
+           
+        
+    }
+
+    /// <summary>
+    /// 人物受伤
+    /// </summary>
+    private void Hurt(GunType gunBullet)
+    {
+        //受到伤害
+        //Debug.Log(gunBullet.ToString());
+        switch (gunBullet)
+        {
+            case GunType.ak47:
+                hp -= 15;
+                break;
+            case GunType.aug:
+                hp -= 15;
+                break;
+            case GunType.deagle:
+                hp -= 9;
+                break;
+            case GunType.famas:
+                hp -= 25;
+                break;
+            case GunType.galil:
+                hp -= 25;
+                break;
+            case GunType.mp5:
+                hp -= 10;
+                break;
+            case GunType.p90:
+                hp -= 9;
+                break;
+            case GunType.scout:
+                hp -= 35;
+                break;
+            case GunType.usp:
+                hp -= 9;
+                break;
+            case GunType.xm1014:
+                hp -= 30;
+                break;
+        }
+
+    }
+
+
     // Use this for initialization
     void Start () {
         aiRigid = GetComponent<Rigidbody2D>();
-	}
+        gunType = GunType.ak47;
+        hp = 100;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        UpdateAI();
-	}
+        if (hp > 0)
+        {
+            UpdateAI();
+        }
+        else
+        {
+            Debug.Log("over");
+            GetComponent<SpriteRenderer>().sprite = diedSprite;
+            this.gameObject.transform.Find("ak470").gameObject.SetActive(false);
+        }
+        
+    }
+
+    /// <summary>
+    /// 撞墙时的角度切换修正
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (hp > 0)
+        {
+            transform.Rotate(new Vector3(0, 0, 75));
+            Move();
+        }
+        
+    }
+
+
+
+
+    /// <summary>
+    /// 玩家更换枪械，受到伤害等的碰撞检测
+    /// </summary>
+    /// <param name="collision">枪的碰撞体</param>
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //与子弹发生碰撞
+        //子弹类型
+        GunType gunbullet;
+        //与子弹发生碰撞
+        for (gunbullet = GunType.ak47; gunbullet <= GunType.usp; gunbullet++)
+        {
+            //Debug.Log("d");
+            if (gunbullet.ToString() + "Buttle" == collision.gameObject.name)
+            {
+                break;
+            }
+        }
+        Hurt(gunbullet);
+    }
 }

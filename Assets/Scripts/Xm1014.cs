@@ -1,8 +1,28 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Xm1014 : Gun {
+    public override void AIShoot()
+    {
+        GetComponent<Xm1014>().AttackTime -= Time.deltaTime;
+        if (GetComponent<Xm1014>().MaxShoot > 0)
+        {
+            if (GetComponent<Xm1014>().AttackTime <= 0)
+            {
+                GetComponent<Xm1014>().AttackTime = 1.4f;
+                GameObject clone = Instantiate(GetComponent<Xm1014>().ShootObj, GetComponent<Xm1014>().ShootPos.position, GetComponent<Xm1014>().ShootPos.rotation);
+                clone.name = "xm1014Buttle";
+                GetComponent<Xm1014>().MaxShoot--;
+            }
+            else
+            {
+                return;
+            }
+        }
+            
+    }
 
     /// <summary>
     /// 该枪械的射击方法

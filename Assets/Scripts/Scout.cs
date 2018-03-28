@@ -1,8 +1,28 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Scout : Gun {
+    public override void AIShoot()
+    {
+        GetComponent<Scout>().AttackTime -= Time.deltaTime;
+        if (GetComponent<Scout>().MaxShoot > 0)
+        {
+            if (GetComponent<Scout>().AttackTime <= 0)
+            {
+                GetComponent<Scout>().AttackTime = 1.7f;
+                GameObject clone = Instantiate(GetComponent<Scout>().ShootObj, GetComponent<Scout>().ShootPos.position, GetComponent<Scout>().ShootPos.rotation);
+                clone.name = "scoutButtle";
+                GetComponent<Scout>().MaxShoot--;
+            }
+            else
+            {
+                return;
+            }
+        }
+            
+    }
 
     /// <summary>
     /// 该枪械的射击方法

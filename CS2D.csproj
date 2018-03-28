@@ -248,6 +248,8 @@
     <Compile Include="Assets\Scripts\PlayerControll.cs" />
     <Compile Include="Assets\Scripts\Scout.cs" />
     <Compile Include="Assets\Scripts\Test\HurtTest.cs" />
+    <Compile Include="Assets\Scripts\Test\NewBehaviourScript.cs" />
+    <Compile Include="Assets\Scripts\Test\PositionTest.cs" />
     <Compile Include="Assets\Scripts\Test\State.cs" />
     <Compile Include="Assets\Scripts\Test\Test.cs" />
     <Compile Include="Assets\Scripts\Usp.cs" />

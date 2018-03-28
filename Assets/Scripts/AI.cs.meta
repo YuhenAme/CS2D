@@ -5,7 +5,10 @@ licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - aiRigid: {instanceID: 0}
+  - aiSprite: {instanceID: 0}
+  - diedSprite: {fileID: 21300000, guid: a8a8711a4b603f74882715e05dec7203, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
