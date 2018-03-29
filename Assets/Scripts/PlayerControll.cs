@@ -22,13 +22,13 @@ public class PlayerControll : MonoBehaviour {
     /// 人物是否存活的状态
     /// </summary>
     [SerializeField]
-    private bool isAlive;
+    private static bool isAlive;
 
     /// <summary>
     /// 人物自身血量
     /// </summary>
     [SerializeField]
-    private int hp=100;
+    public int hp=100;
 
     /// <summary>
     /// 人物的移动速度
@@ -44,7 +44,7 @@ public class PlayerControll : MonoBehaviour {
     /// <summary>
     /// 枪的枚举类型
     /// </summary>
-    private enum GunType
+    public enum GunType
     {
         ak47,
         aug,
@@ -61,10 +61,12 @@ public class PlayerControll : MonoBehaviour {
     /// <summary>
     /// 当前枪械状态
     /// </summary>
-    [SerializeField]
-    private static GunType gunType;
+    public  GunType gunType;
 
-    
+    /// <summary>
+    /// 当前弹药数
+    /// </summary>
+    public int maxShoot;
 
 
 
@@ -152,34 +154,44 @@ public class PlayerControll : MonoBehaviour {
             switch (gunType)
             {
                 case GunType.ak47:
-                    GameObject.Find("ak47").GetComponent<Ak47>().Shoot();
+                    gameObject.transform.Find("ak47").GetComponent<Ak47>().Shoot();
+                    maxShoot = gameObject.transform.Find("ak47").GetComponent<Ak47>().MaxShoot;
                     break;
                 case GunType.aug:
-                    GameObject.Find("aug").GetComponent<Aug>().Shoot();
+                    gameObject.transform.Find("aug").GetComponent<Aug>().Shoot();
+                    maxShoot = gameObject.transform.Find("aug").GetComponent<Aug>().MaxShoot;
                     break;
                 case GunType.deagle:
-                    GameObject.Find("deagle").GetComponent<Deagle>().Shoot();
+                    gameObject.transform.Find("deagle").GetComponent<Deagle>().Shoot();
+                    maxShoot = gameObject.transform.Find("deagle").GetComponent<Deagle>().MaxShoot;
                     break;
                 case GunType.famas:
-                    GameObject.Find("famas").GetComponent<Famas>().Shoot();
+                    gameObject.transform.Find("famas").GetComponent<Famas>().Shoot();
+                    maxShoot = gameObject.transform.Find("famas").GetComponent<Famas>().MaxShoot;
                     break;
                 case GunType.galil:
-                    GameObject.Find("galil").GetComponent<Galil>().Shoot();
+                    gameObject.transform.Find("galil").GetComponent<Galil>().Shoot();
+                    maxShoot = gameObject.transform.Find("galil").GetComponent<Galil>().MaxShoot;
                     break;
                 case GunType.mp5:
-                    GameObject.Find("mp5").GetComponent<Mp5>().Shoot();
+                    gameObject.transform.Find("mp5").GetComponent<Mp5>().Shoot();
+                    maxShoot = gameObject.transform.Find("mp5").GetComponent<Mp5>().MaxShoot;
                     break;
                 case GunType.p90:
-                    GameObject.Find("p90").GetComponent<P90>().Shoot();
+                    gameObject.transform.Find("p90").GetComponent<P90>().Shoot();
+                    maxShoot = gameObject.transform.Find("p90").GetComponent<P90>().MaxShoot;
                     break;
                 case GunType.scout:
-                    GameObject.Find("scout").GetComponent<Scout>().Shoot();
+                    gameObject.transform.Find("scout").GetComponent<Scout>().Shoot();
+                    maxShoot = gameObject.transform.Find("scout").GetComponent<Scout>().MaxShoot;
                     break;
                 case GunType.usp:
-                    GameObject.Find("usp").GetComponent<Usp>().Shoot();
+                    gameObject.transform.Find("usp").GetComponent<Usp>().Shoot();
+                    maxShoot = gameObject.transform.Find("usp").GetComponent<Usp>().MaxShoot;
                     break;
                 case GunType.xm1014:
-                    GameObject.Find("xm1014").GetComponent<Xm1014>().Shoot();
+                    gameObject.transform.Find("xm1014").GetComponent<Xm1014>().Shoot();
+                    maxShoot = gameObject.transform.Find("xm1014").GetComponent<Xm1014>().MaxShoot;
                     break;
         }
         
@@ -192,7 +204,8 @@ public class PlayerControll : MonoBehaviour {
     {
         if (gunType != g)
         {
-            GameObject.Find(gunType.ToString()).SetActive(false);
+            //GameObject.Find(gunType.ToString()).SetActive(false);
+            gameObject.transform.Find(gunType.ToString()).gameObject.SetActive(false);
             gunType = g;
             //找到对应的子物体并将其置为可见
             //Debug.Log(gunType.ToString());
@@ -229,8 +242,7 @@ public class PlayerControll : MonoBehaviour {
             //更换人物的贴图为死亡贴图
             GetComponent<SpriteRenderer>().sprite = diedSprite;
             //将子物体置为不可见
-            this.gameObject.transform.Find(gunType.ToString()).gameObject.SetActive(false);
-            
+            this.gameObject.transform.Find(gunType.ToString()).gameObject.SetActive(false);  
         }
     }
 

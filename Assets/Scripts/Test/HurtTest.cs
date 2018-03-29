@@ -36,7 +36,7 @@ public class HurtTest : MonoBehaviour
     private void Hurt(GunType gunBullet)
     {
         //受到伤害
-        Debug.Log(gunBullet.ToString());
+        //Debug.Log(gunBullet.ToString());
         switch (gunBullet)
         {
             case GunType.ak47://Debug.Log(gunBullet.ToString());
@@ -74,7 +74,7 @@ public class HurtTest : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("done");
+        //Debug.Log("done");
         //与子弹发生碰撞
         //子弹类型
         GunType gunbullet;
@@ -88,7 +88,7 @@ public class HurtTest : MonoBehaviour
                 break;
             }
         }
-        Debug.Log(gunbullet.ToString());
+        //Debug.Log(gunbullet.ToString());
         Hurt(gunbullet);
     }
 }

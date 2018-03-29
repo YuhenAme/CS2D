@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour {
+public class GameUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -13,4 +13,8 @@ public class NewBehaviourScript : MonoBehaviour {
 	void Update () {
 		
 	}
+    //private void OnGUI()
+    //{
+    //    //GUI.Label(new Rect(30, 50, 50, 50), "这个是一个按钮");
+    //}
 }

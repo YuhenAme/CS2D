@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Buttle : MonoBehaviour {
+public  class Buttle : MonoBehaviour {
 
     /// <summary>
     /// 子弹的刚体

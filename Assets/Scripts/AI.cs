@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class AI : MonoBehaviour {
 
+    //属性--------------------------
     /// <summary>
     /// AI的刚体
     /// </summary>
@@ -66,7 +69,6 @@ public class AI : MonoBehaviour {
     {
         move,
         rotate,
-        idle,
         shoot,
     }
 
@@ -89,6 +91,8 @@ public class AI : MonoBehaviour {
     private Sprite diedSprite;
 
 
+
+    //方法-------------------------
     /// <summary>
     /// 更新AI
     /// </summary>
@@ -98,7 +102,7 @@ public class AI : MonoBehaviour {
         {
             //Debug.Log("思考");
             //敌人开始思考
-            AIthinkState(3);
+            AIthinkState(2);
         }
         else
         {
@@ -137,9 +141,6 @@ public class AI : MonoBehaviour {
                 //Debug.Log("状态2，转向");
                 setAIState(State.rotate);
                 break;
-            case 2:
-                setAIState(State.idle);
-                break;
         }
     }
 
@@ -164,7 +165,7 @@ public class AI : MonoBehaviour {
         //这里表示敌人每2秒进行一次思考
         if (Time.time - aiThinkLastTime >= 2.0f)
         {
-            Debug.Log("done");
+            //Debug.Log("done");
             aiThinkLastTime = Time.time;
             return true;
 
@@ -178,25 +179,50 @@ public class AI : MonoBehaviour {
     private void UpdateAIState()
     {
         //攻击判断,如果处于可以进行攻击的状态，则攻击状态优先
-
-        GameObject[] gos = GameObject.FindGameObjectsWithTag("CT");
-        foreach (GameObject go in gos)
+        //T找CT
+        //CT找T
+        if (tag == "CT")
         {
-            //判断敌人与主角之间的距离
-            float distance = Vector3.Distance(go.transform.position, transform.position);
-            if (distance <= 2)
+            GameObject[] gos = GameObject.FindGameObjectsWithTag("T");
+            foreach (GameObject go in gos)
             {
-                //使Enemy朝向目标
-                Vector3 goPos = go.transform.position;
-                Vector3 obj = transform.position;
-                Vector3 direction = goPos - obj;
-                direction.z = 0f;
-                direction = direction.normalized;
-                transform.up = direction;
+                //判断敌人与主角之间的距离
+                float distance = Vector3.Distance(go.transform.position, transform.position);
+                if (distance <= 2)
+                {
+                    //使Enemy朝向目标
+                    Vector3 goPos = go.transform.position;
+                    Vector3 obj = transform.position;
+                    Vector3 direction = goPos - obj;
+                    direction.z = 0f;
+                    direction = direction.normalized;
+                    transform.up = direction;
 
-                setAIState(State.shoot);
+                    setAIState(State.shoot);
+                }
+
             }
+        }else if (tag == "T")
+        {
+            GameObject[] gos = GameObject.FindGameObjectsWithTag("CT");
+            foreach (GameObject go in gos)
+            {
+                //判断敌人与主角之间的距离
+                float distance = Vector3.Distance(go.transform.position, transform.position);
+                if (distance <= 2)
+                {
+                    //使Enemy朝向目标
+                    Vector3 goPos = go.transform.position;
+                    Vector3 obj = transform.position;
+                    Vector3 direction = goPos - obj;
+                    direction.z = 0f;
+                    direction = direction.normalized;
+                    transform.up = direction;
 
+                    setAIState(State.shoot);
+                }
+
+            }
         }
 
             switch (state)
@@ -208,10 +234,6 @@ public class AI : MonoBehaviour {
             case State.rotate:
                 //Debug.Log("rotate");
                 Rotate();
-                break;
-            case State.idle:
-                //Debug.Log("idle");
-                Idle();
                 break;
             case State.shoot:
                 //Debug.Log("shoot");
@@ -227,7 +249,7 @@ public class AI : MonoBehaviour {
     /// </summary>
     private void Move()
     {
-        Debug.Log("move");
+        //Debug.Log("move");
         aiRigid.velocity= transform.TransformDirection(Vector3.up * 0.5f);
     }
     /// <summary>
@@ -235,26 +257,20 @@ public class AI : MonoBehaviour {
     /// </summary>
     private void Rotate()
     {
-        Debug.Log("rotate");
+        //Debug.Log("rotate");
         transform.Rotate(new Vector3(0, 0, 10) * Time.deltaTime);
     }
-    /// <summary>
-    /// 静止状态
-    /// </summary>
-    private void Idle()
-    {
-        aiRigid.velocity = new Vector2(0, 0);
-        Debug.Log("idle");
-    }
+    
     /// <summary>
     /// 攻击方法
     /// </summary>
     private void Shoot()
     {
-        Debug.Log("shoot");
+       // Debug.Log("shoot");
         //transform.LookAt()
-       
-        GameObject.Find("ak470").GetComponent<Ak47>().AIShoot();
+
+        gameObject.transform.Find("ak47").GetComponent<Ak47>().AIShoot();
+        //GameObject.Find("ak470").GetComponent<Ak47>().AIShoot();
            
         
     }
@@ -318,9 +334,11 @@ public class AI : MonoBehaviour {
         }
         else
         {
-            Debug.Log("over");
+            //Debug.Log("over");
+            aiRigid.velocity = new Vector2(0,0);
+            this.tag = "Died";
             GetComponent<SpriteRenderer>().sprite = diedSprite;
-            this.gameObject.transform.Find("ak470").gameObject.SetActive(false);
+            this.gameObject.transform.Find("ak47").gameObject.SetActive(false);
         }
         
     }

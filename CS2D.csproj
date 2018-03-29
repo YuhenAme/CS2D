@@ -247,8 +247,14 @@
     <Compile Include="Assets\Scripts\P90.cs" />
     <Compile Include="Assets\Scripts\PlayerControll.cs" />
     <Compile Include="Assets\Scripts\Scout.cs" />
+    <Compile Include="Assets\Scripts\System\Button.cs" />
+    <Compile Include="Assets\Scripts\System\ButtonTest.cs" />
+    <Compile Include="Assets\Scripts\System\GameUI.cs" />
+    <Compile Include="Assets\Scripts\System\GameWinControll.cs" />
+    <Compile Include="Assets\Scripts\System\GunText.cs" />
+    <Compile Include="Assets\Scripts\System\HpText.cs" />
+    <Compile Include="Assets\Scripts\System\TileText.cs" />
     <Compile Include="Assets\Scripts\Test\HurtTest.cs" />
-    <Compile Include="Assets\Scripts\Test\NewBehaviourScript.cs" />
     <Compile Include="Assets\Scripts\Test\PositionTest.cs" />
     <Compile Include="Assets\Scripts\Test\State.cs" />
     <Compile Include="Assets\Scripts\Test\Test.cs" />
