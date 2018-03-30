@@ -249,10 +249,16 @@
     <Compile Include="Assets\Scripts\Scout.cs" />
     <Compile Include="Assets\Scripts\System\Button.cs" />
     <Compile Include="Assets\Scripts\System\ButtonTest.cs" />
+    <Compile Include="Assets\Scripts\System\ChuseGame.cs" />
     <Compile Include="Assets\Scripts\System\GameUI.cs" />
     <Compile Include="Assets\Scripts\System\GameWinControll.cs" />
     <Compile Include="Assets\Scripts\System\GunText.cs" />
     <Compile Include="Assets\Scripts\System\HpText.cs" />
+    <Compile Include="Assets\Scripts\System\map1.cs" />
+    <Compile Include="Assets\Scripts\System\map2.cs" />
+    <Compile Include="Assets\Scripts\System\map3.cs" />
+    <Compile Include="Assets\Scripts\System\Return.cs" />
+    <Compile Include="Assets\Scripts\System\StartGame.cs" />
     <Compile Include="Assets\Scripts\System\TileText.cs" />
     <Compile Include="Assets\Scripts\Test\HurtTest.cs" />
     <Compile Include="Assets\Scripts\Test\PositionTest.cs" />

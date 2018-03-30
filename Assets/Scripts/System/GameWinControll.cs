@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 判断游戏是否结束的类
@@ -32,8 +33,9 @@ public class GameWinControll : MonoBehaviour {
         {
             Debug.Log("over");
             isOver = true;
+            //---------------------
             //调用第二场景(游戏主菜单)
-
+            SceneManager.LoadScene(0);
         }
 
 
