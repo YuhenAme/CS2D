@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerControll : MonoBehaviour {
@@ -68,6 +69,10 @@ public class PlayerControll : MonoBehaviour {
     /// </summary>
     public int maxShoot;
 
+    /// <summary>
+    /// 玩家的音效
+    /// </summary>
+    private AudioSource[] arrAllAudioSource;
 
 
 
@@ -100,6 +105,7 @@ public class PlayerControll : MonoBehaviour {
         //竖直轴移动
         float v = Input.GetAxisRaw("Vertical");
         playerRigid.velocity = new Vector2(h, v).normalized * moveSpeed;
+       
 
     }
     /// <summary>
@@ -112,34 +118,34 @@ public class PlayerControll : MonoBehaviour {
         switch (gunBullet)
         {
             case GunType.ak47://Debug.Log(gunBullet.ToString());
-                hp -= 15;
+                hp -= 15; arrAllAudioSource[1].Play();
                 break;
             case GunType.aug:
-                hp -= 15;
+                hp -= 15; arrAllAudioSource[1].Play();
                 break;
             case GunType.deagle:
-                hp -= 9;
+                hp -= 9; arrAllAudioSource[1].Play();
                 break;
             case GunType.famas:
-                hp -= 25;
+                hp -= 25; arrAllAudioSource[1].Play();
                 break;
             case GunType.galil:
-                hp -= 25;
+                hp -= 25; arrAllAudioSource[1].Play();
                 break;
             case GunType.mp5:
-                hp -= 10;
+                hp -= 10; arrAllAudioSource[1].Play();
                 break;
             case GunType.p90:
-                hp -= 9;
+                hp -= 9; arrAllAudioSource[1].Play();
                 break;
             case GunType.scout:
-                hp -= 35;
+                hp -= 35; arrAllAudioSource[1].Play();
                 break;
             case GunType.usp:
-                hp -= 9;
+                hp -= 9; arrAllAudioSource[1].Play();
                 break;
             case GunType.xm1014:
-                hp -= 30;
+                hp -= 30; arrAllAudioSource[1].Play();
                 break;
         }
      
@@ -210,6 +216,7 @@ public class PlayerControll : MonoBehaviour {
             //找到对应的子物体并将其置为可见
             //Debug.Log(gunType.ToString());
             this.gameObject.transform.Find(gunType.ToString()).gameObject.SetActive(true);
+            arrAllAudioSource[2].Play();
 
         }
         else
@@ -219,21 +226,41 @@ public class PlayerControll : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// 调出主菜单
+    /// </summary>
+    private void getMenu()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            return;
+        }
 
+        
+    }
+
+    
     void Start () {
         playerRigid = GetComponent<Rigidbody2D>();
         GetComponent<SpriteRenderer>().sprite = humanSprite;
         gunType = GunType.ak47;
         isAlive = true;
-	}
+        arrAllAudioSource = gameObject.GetComponents<AudioSource>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
+        getMenu();
         if (hp> 0)
         {
             LookTo();
             Move();
             Attack();
+            
         }
         else
         {
@@ -242,7 +269,7 @@ public class PlayerControll : MonoBehaviour {
             //更换人物的贴图为死亡贴图
             GetComponent<SpriteRenderer>().sprite = diedSprite;
             //将子物体置为不可见
-            this.gameObject.transform.Find(gunType.ToString()).gameObject.SetActive(false);  
+            this.gameObject.transform.Find(gunType.ToString()).gameObject.SetActive(false);
         }
     }
 
@@ -289,7 +316,7 @@ public class PlayerControll : MonoBehaviour {
     }
 
 
-   
+    
 
 
 

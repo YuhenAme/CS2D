@@ -250,6 +250,7 @@
     <Compile Include="Assets\Scripts\System\Button.cs" />
     <Compile Include="Assets\Scripts\System\ButtonTest.cs" />
     <Compile Include="Assets\Scripts\System\ChuseGame.cs" />
+    <Compile Include="Assets\Scripts\System\ExitGame.cs" />
     <Compile Include="Assets\Scripts\System\GameUI.cs" />
     <Compile Include="Assets\Scripts\System\GameWinControll.cs" />
     <Compile Include="Assets\Scripts\System\GunText.cs" />

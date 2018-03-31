@@ -15,6 +15,7 @@ public class Famas : Gun {
         {
             if (GetComponent<Famas>().AttackTime <= 0)
             {
+                GetComponent<AudioSource>().Play();
                 GetComponent<Famas>().AttackTime = 1.6f;
                 //Debug.Log("done");
                 GameObject clone = Instantiate(GetComponent<Famas>().ShootObj, GetComponent<Famas>().ShootPos.position, GetComponent<Famas>().ShootPos.rotation);
@@ -37,6 +38,7 @@ public class Famas : Gun {
             {
                 if (GetComponent<Famas>().AttackTime <= 0)
                 {
+                    GetComponent<AudioSource>().Play();
                     GetComponent<Famas>().AttackTime = 1.6f;
                     //Debug.Log("done");
                     GameObject clone = Instantiate(GetComponent<Famas>().ShootObj, GetComponent<Famas>().ShootPos.position, GetComponent<Famas>().ShootPos.rotation);

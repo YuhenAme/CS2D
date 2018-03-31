@@ -11,6 +11,7 @@ public class P90 : Gun {
         {
             if (GetComponent<P90>().AttackTime <= 0)
             {
+                GetComponent<AudioSource>().Play();
                 GetComponent<P90>().AttackTime = 0.4f;
                 //Debug.Log("ok");
                 GameObject clone = Instantiate(GetComponent<P90>().ShootObj, GetComponent<P90>().ShootPos.position, GetComponent<P90>().ShootPos.rotation);
@@ -37,6 +38,7 @@ public class P90 : Gun {
             {
                 if (GetComponent<P90>().AttackTime <= 0)
                 {
+                    GetComponent<AudioSource>().Play();
                     GetComponent<P90>().AttackTime = 0.4f;
                     //Debug.Log("ok");
                     GameObject clone = Instantiate(GetComponent<P90>().ShootObj, GetComponent<P90>().ShootPos.position, GetComponent<P90>().ShootPos.rotation);

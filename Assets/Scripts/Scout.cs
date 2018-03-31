@@ -11,6 +11,7 @@ public class Scout : Gun {
         {
             if (GetComponent<Scout>().AttackTime <= 0)
             {
+                GetComponent<AudioSource>().Play();
                 GetComponent<Scout>().AttackTime = 1.7f;
                 GameObject clone = Instantiate(GetComponent<Scout>().ShootObj, GetComponent<Scout>().ShootPos.position, GetComponent<Scout>().ShootPos.rotation);
                 clone.name = "scoutButtle";
@@ -36,6 +37,7 @@ public class Scout : Gun {
             {
                 if (GetComponent<Scout>().AttackTime <= 0)
                 {
+                    GetComponent<AudioSource>().Play();
                     GetComponent<Scout>().AttackTime = 1.7f;
                     GameObject clone = Instantiate(GetComponent<Scout>().ShootObj, GetComponent<Scout>().ShootPos.position, GetComponent<Scout>().ShootPos.rotation);
                     clone.name = "scoutButtle";

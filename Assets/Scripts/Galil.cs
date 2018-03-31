@@ -15,6 +15,7 @@ public class Galil : Gun {
         {
             if (GetComponent<Galil>().AttackTime <= 0)
             {
+                GetComponent<AudioSource>().Play();
                 GetComponent<Galil>().AttackTime = 0.7f;
                 GameObject clone = Instantiate(GetComponent<Galil>().ShootObj, GetComponent<Galil>().ShootPos.position, GetComponent<Galil>().ShootPos.rotation);
                 clone.name = "galilButtle";
@@ -35,6 +36,7 @@ public class Galil : Gun {
             {
                 if (GetComponent<Galil>().AttackTime <= 0)
                 {
+                    GetComponent<AudioSource>().Play();
                     GetComponent<Galil>().AttackTime = 0.7f;
                     GameObject clone = Instantiate(GetComponent<Galil>().ShootObj, GetComponent<Galil>().ShootPos.position, GetComponent<Galil>().ShootPos.rotation);
                     clone.name = "galilButtle";

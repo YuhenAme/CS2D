@@ -13,5 +13,6 @@ public class map2 : MonoBehaviour {
 	public void OnDown()
     {
         //第二地图
+        SceneManager.LoadScene(3);
     }
 }

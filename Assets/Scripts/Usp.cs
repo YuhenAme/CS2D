@@ -15,6 +15,7 @@ public class Usp : Gun {
         {
             if (GetComponent<Usp>().AttackTime <= 0)
             {
+                GetComponent<AudioSource>().Play();
                 GetComponent<Usp>().AttackTime = 1.0f;
                 //Debug.Log("ok");
                 GameObject clone = Instantiate(GetComponent<Usp>().ShootObj, GetComponent<Usp>().ShootPos.position, GetComponent<Usp>().ShootPos.rotation);
@@ -40,6 +41,7 @@ public class Usp : Gun {
             {
                 if (GetComponent<Usp>().AttackTime <= 0)
                 {
+                    GetComponent<AudioSource>().Play();
                     GetComponent<Usp>().AttackTime = 1.0f;
                     //Debug.Log("ok");
                     GameObject clone = Instantiate(GetComponent<Usp>().ShootObj, GetComponent<Usp>().ShootPos.position, GetComponent<Usp>().ShootPos.rotation);

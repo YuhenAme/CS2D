@@ -15,6 +15,7 @@ public class Aug : Gun {
         {
             if (GetComponent<Aug>().AttackTime <= 0)
             {
+                GetComponent<AudioSource>().Play();
                 GetComponent<Aug>().AttackTime = 0.7f;
                 GameObject clone = Instantiate(GetComponent<Aug>().ShootObj, GetComponent<Aug>().ShootPos.position, GetComponent<Aug>().ShootPos.rotation);
                 clone.name = "augButtle";
@@ -40,6 +41,7 @@ public class Aug : Gun {
             {
                 if (GetComponent<Aug>().AttackTime <= 0)
                 {
+                    GetComponent<AudioSource>().Play();
                     GetComponent<Aug>().AttackTime = 0.7f;
                     GameObject clone = Instantiate(GetComponent<Aug>().ShootObj, GetComponent<Aug>().ShootPos.position, GetComponent<Aug>().ShootPos.rotation);
                     clone.name = "augButtle";

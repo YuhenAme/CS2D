@@ -16,6 +16,7 @@ public class Mp5 : Gun {
             
             if (GetComponent<Mp5>().AttackTime <= 0)
             {
+                GetComponent<AudioSource>().Play();
                 GetComponent<Mp5>().AttackTime = 0.4f;
                 GameObject clone = Instantiate(GetComponent<Mp5>().ShootObj, GetComponent<Mp5>().ShootPos.position, GetComponent<Mp5>().ShootPos.rotation);
                 clone.name = "mp5Buttle";
@@ -40,6 +41,7 @@ public class Mp5 : Gun {
             {
                 if (GetComponent<Mp5>().AttackTime <= 0)
                 {
+                    GetComponent<AudioSource>().Play();
                     GetComponent<Mp5>().AttackTime = 0.4f;
                     GameObject clone = Instantiate(GetComponent<Mp5>().ShootObj, GetComponent<Mp5>().ShootPos.position, GetComponent<Mp5>().ShootPos.rotation);
                     clone.name = "mp5Buttle";

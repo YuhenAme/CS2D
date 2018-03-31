@@ -15,6 +15,7 @@ public class Deagle : Gun {
         {
             if (GetComponent<Deagle>().AttackTime <= 0)
             {
+                GetComponent<AudioSource>().Play();
                 GetComponent<Deagle>().AttackTime = 1.0f;
                 //Debug.Log("done");
                 GameObject clone = Instantiate(GetComponent<Deagle>().ShootObj, GetComponent<Deagle>().ShootPos.position, GetComponent<Deagle>().ShootPos.rotation);
@@ -37,6 +38,7 @@ public class Deagle : Gun {
             {
                 if (GetComponent<Deagle>().AttackTime <= 0)
                 {
+                    GetComponent<AudioSource>().Play();
                     GetComponent<Deagle>().AttackTime = 1.0f;
                     //Debug.Log("done");
                     GameObject clone = Instantiate(GetComponent<Deagle>().ShootObj, GetComponent<Deagle>().ShootPos.position, GetComponent<Deagle>().ShootPos.rotation);

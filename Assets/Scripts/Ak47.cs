@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Ak47 : Gun {
 
+
+
     /// <summary>
     /// AI的射击方法
     /// </summary>
@@ -15,6 +17,8 @@ public class Ak47 : Gun {
         {
             if (GetComponent<Ak47>().AttackTime <= 0)
             {
+                //添加音效
+                GetComponent<AudioSource>().Play();
                 GetComponent<Ak47>().AttackTime = 1.6f;
                 GameObject clone = Instantiate(GetComponent<Ak47>().ShootObj, GetComponent<Ak47>().ShootPos.position, GetComponent<Ak47>().ShootPos.rotation);
                 clone.name = "ak47Buttle";
@@ -37,6 +41,8 @@ public class Ak47 : Gun {
             {
                 if (GetComponent<Ak47>().AttackTime <= 0)
                 {
+                    //添加音效
+                    GetComponent<AudioSource>().Play();
                     GetComponent<Ak47>().AttackTime = 0.6f;
                     GameObject clone = Instantiate(GetComponent<Ak47>().ShootObj, GetComponent<Ak47>().ShootPos.position, GetComponent<Ak47>().ShootPos.rotation);
                     clone.name = "ak47Buttle";
@@ -64,6 +70,7 @@ public class Ak47 : Gun {
    
     // Use this for initialization
     void Start () {
+       
         Init();
         //float a = GetComponent<Ak47>().AttackTime;
     }
