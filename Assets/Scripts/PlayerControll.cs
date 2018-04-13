@@ -74,21 +74,7 @@ public class PlayerControll : MonoBehaviour {
     /// </summary>
     private AudioSource[] arrAllAudioSource;
 
-    /// <summary>
-    /// 是否处于购买的状态
-    /// </summary>
-    [SerializeField]
-    private bool isBuying = false;
 
-    public bool IsBuying
-    {
-        set
-        {
-            isBuying = value;
-        }
-    }
-
-    public GameObject panel;
 
     //方法------------------
     /// <summary>
@@ -224,9 +210,11 @@ public class PlayerControll : MonoBehaviour {
     {
         if (gunType != g)
         {
+            //GameObject.Find(gunType.ToString()).SetActive(false);
             gameObject.transform.Find(gunType.ToString()).gameObject.SetActive(false);
             gunType = g;
             //找到对应的子物体并将其置为可见
+            //Debug.Log(gunType.ToString());
             this.gameObject.transform.Find(gunType.ToString()).gameObject.SetActive(true);
             arrAllAudioSource[2].Play();
 
@@ -256,45 +244,12 @@ public class PlayerControll : MonoBehaviour {
     }
 
     
-
-    /// <summary>
-    /// 购买枪械的ui
-    /// </summary>
-    private void BuyGuns()
-    {
-        //GameObject BuyGunsPanel = GameObject.Find("minimap").transform.Find("BuyGunPanel").gameObject;
-        panel.SetActive(true);
-        isBuying = true;
-
-    }
-
-    /// <summary>
-    /// 玩家的行动，包括移动，攻击，买枪等
-    /// </summary>
-    private void Act()
-    {
-        if (isBuying == false)
-        {
-            LookTo();
-            Move();
-            Attack();
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            BuyGuns();
-        }
-
-    }
-
-
-
     void Start () {
         playerRigid = GetComponent<Rigidbody2D>();
         GetComponent<SpriteRenderer>().sprite = humanSprite;
         gunType = GunType.ak47;
         isAlive = true;
         arrAllAudioSource = gameObject.GetComponents<AudioSource>();
-        panel = GameObject.Find("minimap").transform.Find("BuyGunPanel").gameObject;
     }
 	
 	// Update is called once per frame
@@ -302,16 +257,13 @@ public class PlayerControll : MonoBehaviour {
         getMenu();
         if (hp> 0)
         {
-            //LookTo();
-            //Move();
-            //Attack();
-            Act();
+            LookTo();
+            Move();
+            Attack();
             
         }
         else
         {
-            this.tag = "Died";
-            playerRigid.velocity = new Vector2(0, 0);
             //人物死亡
             isAlive = false;
             //更换人物的贴图为死亡贴图
