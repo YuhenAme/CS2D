@@ -8,6 +8,7 @@ TagManager:
   - CT
   - T
   - Died
+  - aug
   layers:
   - Default
   - TransparentFX

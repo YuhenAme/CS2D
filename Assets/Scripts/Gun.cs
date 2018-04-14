@@ -17,7 +17,7 @@ public abstract class Gun : MonoBehaviour {
     {
         get
         {
-           return attackForce;
+            return attackForce;
         }
         set
         {
@@ -29,7 +29,7 @@ public abstract class Gun : MonoBehaviour {
     /// 武器的攻击间隔时间
     /// </summary>
     [SerializeField]
-    private  float attackTime;
+    protected float attackTime;
     public float AttackTime
     {
         get
@@ -46,7 +46,7 @@ public abstract class Gun : MonoBehaviour {
     /// 武器的子弹发射位置
     /// </summary>
     [SerializeField]
-    private Transform shootPos;
+    protected Transform shootPos;
     public Transform ShootPos
     {
         get
@@ -63,7 +63,7 @@ public abstract class Gun : MonoBehaviour {
     /// 子弹的限制数
     /// </summary>
     [SerializeField]
-    private int maxShoot;
+    protected int maxShoot;
     public int MaxShoot
     {
         get
@@ -80,7 +80,7 @@ public abstract class Gun : MonoBehaviour {
     /// 子弹
     /// </summary>
     [SerializeField]
-    private GameObject shootObj;
+    protected GameObject shootObj;
     public GameObject ShootObj
     {
         get
@@ -93,9 +93,26 @@ public abstract class Gun : MonoBehaviour {
         }
     }
 
-
+    /// <summary>
+    /// 武器编号
+    /// </summary>
+    [SerializeField]
+    protected int id;
+    public int ID
+    {
+        get
+        {
+            return id;
+        }
+        set
+        {
+            id = value;
+        }
+    }
 
     //方法---------------------
+
+
     /// <summary>
     /// 射击方法
     /// </summary>
@@ -109,10 +126,7 @@ public abstract class Gun : MonoBehaviour {
 
 
 
-void Start()
-    {
-        //shootPos = GameObject.Find("shootPos").transform;
-    }
+
 
 
 

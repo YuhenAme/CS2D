@@ -243,6 +243,7 @@
     <Compile Include="Assets\Scripts\Famas.cs" />
     <Compile Include="Assets\Scripts\Galil.cs" />
     <Compile Include="Assets\Scripts\Gun.cs" />
+    <Compile Include="Assets\Scripts\GunInstance.cs" />
     <Compile Include="Assets\Scripts\Mp5.cs" />
     <Compile Include="Assets\Scripts\P90.cs" />
     <Compile Include="Assets\Scripts\PlayerControll.cs" />

@@ -41,6 +41,7 @@ public class Aug : Gun {
             {
                 if (GetComponent<Aug>().AttackTime <= 0)
                 {
+                    Debug.Log("hh");
                     GetComponent<AudioSource>().Play();
                     GetComponent<Aug>().AttackTime = 0.7f;
                     GameObject clone = Instantiate(GetComponent<Aug>().ShootObj, GetComponent<Aug>().ShootPos.position, GetComponent<Aug>().ShootPos.rotation);
@@ -67,6 +68,7 @@ public class Aug : Gun {
         GetComponent<Aug>().AttackForce = 15;
         GetComponent<Aug>().AttackTime = 0.7f;
         GetComponent<Aug>().ShootPos = GetComponentInChildren<Transform>().Find("shootPosition");
+        GetComponent<Aug>().ID = 2;
     }
     // Use this for initialization
     void Start () {

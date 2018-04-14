@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Ak47 : Gun {
 
+    
+
+
 
 
     /// <summary>
@@ -34,6 +37,7 @@ public class Ak47 : Gun {
     //private Rigidbody2D cloneRigid;
     public override void Shoot()
     {
+        //Debug.Log("done");
         GetComponent<Ak47>().AttackTime -= Time.deltaTime;
         if (GetComponent<Ak47>().MaxShoot > 0)
         {
@@ -41,6 +45,7 @@ public class Ak47 : Gun {
             {
                 if (GetComponent<Ak47>().AttackTime <= 0)
                 {
+                    Debug.Log("done");
                     //添加音效
                     GetComponent<AudioSource>().Play();
                     GetComponent<Ak47>().AttackTime = 0.6f;
@@ -66,6 +71,7 @@ public class Ak47 : Gun {
         GetComponent<Ak47>().AttackForce = 15;
         GetComponent<Ak47>().AttackTime = 0.6f;
         GetComponent<Ak47>().ShootPos = GetComponentInChildren<Transform>().Find("shootPosition");
+        GetComponent<Ak47>().ID = 1;
     }
    
     // Use this for initialization
