@@ -55,13 +55,14 @@ public class P90 : Gun {
     /// <summary>
     /// 初始化方法
     /// </summary>    
-    private void Init()
+    public void Init()
     {
 
         GetComponent<P90>().MaxShoot = 200;
         GetComponent<P90>().AttackForce = 9;
         GetComponent<P90>().AttackTime = 0.4f;
         GetComponent<P90>().ShootPos = GetComponentInChildren<Transform>().Find("shootPosition");
+        GetComponent<P90>().ID = 8;
     }
     // Use this for initialization
     void Start()

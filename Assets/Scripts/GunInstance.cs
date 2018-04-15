@@ -18,7 +18,8 @@ public static class GunInstance{
         {
             if (ak47Instance == null)
             {
-                ak47Instance = GameObject.Find("ak47").GetComponent<Ak47>();
+                ak47Instance = GameObject.Find("player").transform.Find("ak47").GetComponent<Ak47>();
+                ak47Instance.Init();//之前得到实例的时候没有调用其实例化方法
             }
             return ak47Instance;
         }
@@ -35,6 +36,7 @@ public static class GunInstance{
             if (augInstance == null)
             {
                 augInstance = GameObject.Find("player").transform.Find("aug").GetComponent<Aug>();
+                augInstance.Init();
             }
             return augInstance;
         }
@@ -50,7 +52,8 @@ public static class GunInstance{
         {
             if (deagleInstance == null)
             {
-                deagleInstance = GameObject.Find("deagle").GetComponent<Deagle>();
+                deagleInstance = GameObject.Find("player").transform.Find("deagle").GetComponent<Deagle>();
+                deagleInstance.Init();
             }
             return deagleInstance;
         }
@@ -63,7 +66,8 @@ public static class GunInstance{
         {
             if (famasInstance == null)
             {
-                famasInstance = GameObject.Find("famas").GetComponent<Famas>();
+                famasInstance = GameObject.Find("player").transform.Find("famas").GetComponent<Famas>();
+                famasInstance.Init();
             }
             return famasInstance;
         }
@@ -76,7 +80,8 @@ public static class GunInstance{
         {
             if (galilInstance == null)
             {
-                galilInstance = GameObject.Find("galil").GetComponent<Galil>();
+                galilInstance = GameObject.Find("player").transform.Find("galil").GetComponent<Galil>();
+                galilInstance.Init();
             }
             return galilInstance;
         }
@@ -89,7 +94,8 @@ public static class GunInstance{
         {
             if (mp5Instance == null)
             {
-                mp5Instance = GameObject.Find("mp5").GetComponent<Mp5>();
+                mp5Instance = GameObject.Find("player").transform.Find("mp5").GetComponent<Mp5>();
+                mp5Instance.Init();
             }
             return mp5Instance;
         }
@@ -102,7 +108,8 @@ public static class GunInstance{
         {
             if (p90Instance == null)
             {
-                p90Instance = GameObject.Find("p90").GetComponent<P90>();
+                p90Instance = GameObject.Find("player").transform.Find("p90").GetComponent<P90>();
+                p90Instance.Init();
             }
             return p90Instance;
         }
@@ -115,7 +122,8 @@ public static class GunInstance{
         {
             if (scoutInstance == null)
             {
-                scoutInstance = GameObject.Find("scout").GetComponent<Scout>();
+                scoutInstance = GameObject.Find("player").transform.Find("scout").GetComponent<Scout>();
+                scoutInstance.Init();
             }
             return scoutInstance;
         }
@@ -128,7 +136,8 @@ public static class GunInstance{
         {
             if (uspInstance == null)
             {
-                uspInstance = GameObject.Find("usp").GetComponent<Usp>();
+                uspInstance = GameObject.Find("player").transform.Find("usp").GetComponent<Usp>();
+                uspInstance.Init();
             }
             return uspInstance;
         }
@@ -141,7 +150,8 @@ public static class GunInstance{
         {
             if (xm1014Instance == null)
             {
-                xm1014Instance = GameObject.Find("xm1014").GetComponent<Xm1014>();
+                xm1014Instance = GameObject.Find("player").transform.Find("xm1014").GetComponent<Xm1014>();
+                xm1014Instance.Init();
             }
             return xm1014Instance;
         }

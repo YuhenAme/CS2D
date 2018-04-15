@@ -58,13 +58,14 @@ public class Usp : Gun {
     /// <summary>
     /// 初始化方法
     /// </summary>    
-    private void Init()
+    public void Init()
     {
 
         GetComponent<Usp>().MaxShoot = 40;
         GetComponent<Usp>().AttackForce = 9;
         GetComponent<Usp>().AttackTime = 1.0f;
         GetComponent<Usp>().ShootPos = GetComponentInChildren<Transform>().Find("shootPosition");
+        GetComponent<Usp>().ID = 9;
     }
     // Use this for initialization
     void Start()

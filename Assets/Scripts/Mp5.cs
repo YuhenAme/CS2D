@@ -57,13 +57,14 @@ public class Mp5 : Gun {
     /// <summary>
     /// 初始化方法
     /// </summary>    
-    private void Init()
+    public void Init()
     {
 
         GetComponent<Mp5>().MaxShoot = 200;
         GetComponent<Mp5>().AttackForce = 9;
         GetComponent<Mp5>().AttackTime = 0.4f;
         GetComponent<Mp5>().ShootPos = GetComponentInChildren<Transform>().Find("shootPosition");
+        GetComponent<Mp5>().ID = 5;
     }
     // Use this for initialization
     void Start () {

@@ -9,6 +9,15 @@ TagManager:
   - T
   - Died
   - aug
+  - ak47
+  - famas
+  - galil
+  - mp5
+  - p90
+  - scout
+  - xm1014
+  - usp
+  - deagle
   layers:
   - Default
   - TransparentFX

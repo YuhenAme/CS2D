@@ -61,14 +61,14 @@ public class Aug : Gun {
     /// <summary>
     /// 初始化方法
     /// </summary>    
-    private void Init()
+    public void Init()
     {
         
         GetComponent<Aug>().MaxShoot = 150;
         GetComponent<Aug>().AttackForce = 15;
         GetComponent<Aug>().AttackTime = 0.7f;
         GetComponent<Aug>().ShootPos = GetComponentInChildren<Transform>().Find("shootPosition");
-        GetComponent<Aug>().ID = 2;
+        GetComponent<Aug>().ID = 1;
     }
     // Use this for initialization
     void Start () {

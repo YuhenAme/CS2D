@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerControll : MonoBehaviour {
 
-    //属性------------------
+    //属性与字段------------------
     /// <summary>
     /// 人物的贴图
     /// </summary>
@@ -30,14 +30,12 @@ public class PlayerControll : MonoBehaviour {
     /// 人物自身血量
     /// </summary>
     [SerializeField]
-    public int hp=100;
-
+    public int hp = 100;
     /// <summary>
     /// 人物的移动速度
     /// </summary>
     [SerializeField]
     private float moveSpeed=1.0f;
-
     /// <summary>
     /// 人物所需刚体
     /// </summary>
@@ -68,8 +66,18 @@ public class PlayerControll : MonoBehaviour {
     /// <summary>
     /// 当前弹药数
     /// </summary>
-    public int maxShoot;
-    
+    private int maxShoot;
+    public int MaxShoot
+    {
+        get
+        {
+            return maxShoot;
+        }
+        set
+        {
+            maxShoot = value;
+        }
+    }
 
     /// <summary>
     /// 玩家的音效
@@ -91,29 +99,19 @@ public class PlayerControll : MonoBehaviour {
     /// <param name="gun">传入的武器</param>
     public void SetGun(Gun gun)
     {
-        //Debug.Log(gun.ToString());
-        
         //当武器不为空时，改变武器
         if (TheGun != null)
         {
-            Debug.Log(TheGun.ID.ToString());
             gameObject.transform.GetChild(TheGun.ID).gameObject.SetActive(false);
             TheGun = gun;
-            Debug.Log(TheGun.ID.ToString());
             gameObject.transform.GetChild(TheGun.ID).gameObject.SetActive(true);
             arrAllAudioSource[2].Play();
-            //TheGun = gun;
         }
         else
         {
             TheGun = gun;
-            //Debug.Log(TheGun.ToString());
-            //Debug.Log(gameObject.transform.GetChild(0).ToString());
-            //gameObject.transform.Find(TheGun.ToString()).gameObject.SetActive(true);
             gameObject.transform.GetChild(TheGun.ID).gameObject.SetActive(true);
         }
-
-
     }
 
     //方法------------------
@@ -122,7 +120,7 @@ public class PlayerControll : MonoBehaviour {
    /// 获取自身实例
    /// </summary>
     public PlayerControll Instance
-    {
+    {//单例模式
         get
         {
             if (instance == null)
@@ -144,8 +142,8 @@ public class PlayerControll : MonoBehaviour {
         //获得音效
         arrAllAudioSource = gameObject.GetComponents<AudioSource>();
         //设置武器,获得武器的实例
-        //TheGun = GunInstance.Ak47Instance;
         Instance.SetGun(GunInstance.Ak47Instance);
+        //Debug.Log(GunInstance.AugInstance.ID.ToString());
     }
 
     /// <summary>
@@ -192,17 +190,17 @@ public class PlayerControll : MonoBehaviour {
         }
     }
 
-
     /// <summary>
     /// 重写玩家攻击函数
     /// </summary>
     private void PlayerAttack()
     {
-        maxShoot = TheGun.MaxShoot;
+        MaxShoot = TheGun.MaxShoot;
         TheGun.Shoot();
     }
 
-
+    //武器接口重构完成，这样买枪的话直接SetGun()就可以实现了-----------
+    //等待重构(重写)玩家的伤害判断，准备写一个系统类包含伤害判断等-----
 
 
 
@@ -281,82 +279,6 @@ public class PlayerControll : MonoBehaviour {
      
     }
     /// <summary>
-    /// 人物攻击
-    /// </summary>
-    private void Attack()
-    {
-            //实例化子弹
-            //根据枪械的种类来调用对应枪的shoot()方法
-            switch (gunType)
-            {
-                case GunType.ak47:
-                    gameObject.transform.Find("ak47").GetComponent<Ak47>().Shoot();
-                    maxShoot = gameObject.transform.Find("ak47").GetComponent<Ak47>().MaxShoot;
-                    break;
-                case GunType.aug:
-                    gameObject.transform.Find("aug").GetComponent<Aug>().Shoot();
-                    maxShoot = gameObject.transform.Find("aug").GetComponent<Aug>().MaxShoot;
-                    break;
-                case GunType.deagle:
-                    gameObject.transform.Find("deagle").GetComponent<Deagle>().Shoot();
-                    maxShoot = gameObject.transform.Find("deagle").GetComponent<Deagle>().MaxShoot;
-                    break;
-                case GunType.famas:
-                    gameObject.transform.Find("famas").GetComponent<Famas>().Shoot();
-                    maxShoot = gameObject.transform.Find("famas").GetComponent<Famas>().MaxShoot;
-                    break;
-                case GunType.galil:
-                    gameObject.transform.Find("galil").GetComponent<Galil>().Shoot();
-                    maxShoot = gameObject.transform.Find("galil").GetComponent<Galil>().MaxShoot;
-                    break;
-                case GunType.mp5:
-                    gameObject.transform.Find("mp5").GetComponent<Mp5>().Shoot();
-                    maxShoot = gameObject.transform.Find("mp5").GetComponent<Mp5>().MaxShoot;
-                    break;
-                case GunType.p90:
-                    gameObject.transform.Find("p90").GetComponent<P90>().Shoot();
-                    maxShoot = gameObject.transform.Find("p90").GetComponent<P90>().MaxShoot;
-                    break;
-                case GunType.scout:
-                    gameObject.transform.Find("scout").GetComponent<Scout>().Shoot();
-                    maxShoot = gameObject.transform.Find("scout").GetComponent<Scout>().MaxShoot;
-                    break;
-                case GunType.usp:
-                    gameObject.transform.Find("usp").GetComponent<Usp>().Shoot();
-                    maxShoot = gameObject.transform.Find("usp").GetComponent<Usp>().MaxShoot;
-                    break;
-                case GunType.xm1014:
-                    gameObject.transform.Find("xm1014").GetComponent<Xm1014>().Shoot();
-                    maxShoot = gameObject.transform.Find("xm1014").GetComponent<Xm1014>().MaxShoot;
-                    break;
-        }
-        
-    }
-
-    /// <summary>
-    /// 更改玩家所持枪械状态
-    /// </summary>
-    private void ChangeState(GunType g)
-    {
-        if (gunType != g)
-        {
-            //GameObject.Find(gunType.ToString()).SetActive(false);
-            gameObject.transform.Find(gunType.ToString()).gameObject.SetActive(false);
-            gunType = g;
-            //找到对应的子物体并将其置为可见
-            //Debug.Log(gunType.ToString());
-            this.gameObject.transform.Find(gunType.ToString()).gameObject.SetActive(true);
-            arrAllAudioSource[2].Play();
-
-        }
-        else
-        {
-            return;
-        }
-
-    }
-
-    /// <summary>
     /// 调出主菜单
     /// </summary>
     private void getMenu()
@@ -377,7 +299,7 @@ public class PlayerControll : MonoBehaviour {
     void Start () {
         playerRigid = GetComponent<Rigidbody2D>();
         GetComponent<SpriteRenderer>().sprite = humanSprite;
-        gunType = GunType.ak47;
+        //gunType = GunType.ak47;
         isAlive = true;
         arrAllAudioSource = gameObject.GetComponents<AudioSource>();
         Init();
@@ -390,7 +312,6 @@ public class PlayerControll : MonoBehaviour {
         {
             LookTo();
             Move();
-            //Attack();
             PlayerAttack();
             
         }
@@ -404,52 +325,5 @@ public class PlayerControll : MonoBehaviour {
             this.gameObject.transform.Find(gunType.ToString()).gameObject.SetActive(false);
         }
     }
-
-    /// <summary>
-    /// 玩家更换枪械，受到伤害等的碰撞检测
-    /// </summary>
-    /// <param name="collision">枪的碰撞体</param>
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    //与子弹发生碰撞
-    //    //子弹类型
-    //    GunType gunbullet;
-    //    //与子弹发生碰撞
-    //    for (gunbullet = GunType.ak47; gunbullet <= GunType.usp; gunbullet++)
-    //    {
-    //        //Debug.Log("d");
-    //        if (gunbullet.ToString() + "Buttle" == collision.gameObject.name)
-    //        {
-    //            break;
-    //        }
-    //    }
-    //    Hurt(gunbullet);
-
-
-    //    //与枪械发生碰撞(更换枪械)
-    //    if (gunType.ToString() + "_d" != collision.gameObject.name)
-    //    {
-    //        GunType t;
-    //        for (t = GunType.ak47; t <= GunType.usp; t++)
-    //        {
-    //            if (t.ToString() + "_d" == collision.gameObject.name)
-    //            {
-    //                break;//如果没有找到则t结束循环时t会等于10
-    //            }
-    //        }
-    //        //如果未检测到相应的枪械的碰撞体则不改变枪的状态
-    //        if (t > GunType.usp)
-    //        {
-    //            t = gunType;
-    //        }
-    //        //Debug.Log(t.ToString());
-    //        ChangeState(t);
-    //    }
-    //}
-
-
-    
-
-
 
 }

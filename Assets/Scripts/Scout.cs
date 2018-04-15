@@ -53,13 +53,14 @@ public class Scout : Gun {
     /// <summary>
     /// 初始化方法
     /// </summary>    
-    private void Init()
+    public void Init()
     {
 
         GetComponent<Scout>().MaxShoot = 70;
         GetComponent<Scout>().AttackForce = 35;
         GetComponent<Scout>().AttackTime = 1.7f;
         GetComponent<Scout>().ShootPos = GetComponentInChildren<Transform>().Find("shootPosition");
+        GetComponent<Scout>().ID = 6;
     }
     // Use this for initialization
     void Start () {

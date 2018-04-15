@@ -16,8 +16,8 @@ public class GunText : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        string s = p.gunType.ToString();
-        string a = p.maxShoot.ToString();
+        string s = p.TheGun.ToString();
+        string a = p.MaxShoot.ToString();
         GetComponent<Text>().text = "<color=#0A0A0A>" + s + "</color>"+"   "+ a;
 
     }

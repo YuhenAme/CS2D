@@ -65,13 +65,13 @@ public class Ak47 : Gun {
     /// <summary>
     /// 初始化方法
     /// </summary>    
-    private void Init()
+    public void Init()
     {
         GetComponent<Ak47>().MaxShoot = 100;
         GetComponent<Ak47>().AttackForce = 15;
         GetComponent<Ak47>().AttackTime = 0.6f;
         GetComponent<Ak47>().ShootPos = GetComponentInChildren<Transform>().Find("shootPosition");
-        GetComponent<Ak47>().ID = 1;
+        GetComponent<Ak47>().ID = 0;
     }
    
     // Use this for initialization

@@ -57,12 +57,13 @@ public class Famas : Gun {
     /// <summary>
     /// 初始化方法
     /// </summary>    
-    private void Init()
+    public void Init()
     {
         GetComponent<Famas>().MaxShoot = 70;
         GetComponent<Famas>().AttackForce = 25;
         GetComponent<Famas>().AttackTime = 1.6f;
         GetComponent<Famas>().ShootPos = GetComponentInChildren<Transform>().Find("shootPosition");
+        GetComponent<Famas>().ID = 3;
     }
     // Use this for initialization
     void Start () {

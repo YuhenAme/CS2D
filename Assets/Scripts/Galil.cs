@@ -50,12 +50,13 @@ public class Galil : Gun {
     /// <summary>
     /// 初始化方法
     /// </summary>    
-    private void Init()
+    public void Init()
     {
         GetComponent<Galil>().MaxShoot = 90;
         GetComponent<Galil>().AttackForce = 25;
         GetComponent<Galil>().AttackTime = 0.7f;
         GetComponent<Galil>().ShootPos = GetComponentInChildren<Transform>().Find("shootPosition");
+        GetComponent<Galil>().ID = 4;
     }
     // Use this for initialization
     void Start () {

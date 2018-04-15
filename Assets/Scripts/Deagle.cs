@@ -58,12 +58,13 @@ public class Deagle : Gun {
     /// <summary>
     /// 初始化方法
     /// </summary>    
-    private void Init()
+    public void Init()
     {
         GetComponent<Deagle>().MaxShoot = 40;
         GetComponent<Deagle>().AttackForce = 9;
         GetComponent<Deagle>().AttackTime = 1.0f;
         GetComponent<Deagle>().ShootPos = GetComponentInChildren<Transform>().Find("shootPosition");
+        GetComponent<Deagle>().ID = 2;
     }
     // Use this for initialization
     void Start () {

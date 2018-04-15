@@ -53,13 +53,14 @@ public class Xm1014 : Gun {
     /// <summary>
     /// 初始化方法
     /// </summary>    
-    private void Init()
+    public void Init()
     {
 
         GetComponent<Xm1014>().MaxShoot = 60;
         GetComponent<Xm1014>().AttackForce = 30;
         GetComponent<Xm1014>().AttackTime = 1.4f;
         GetComponent<Xm1014>().ShootPos = GetComponentInChildren<Transform>().Find("shootPosition");
+        GetComponent<Xm1014>().ID = 7;
     }
     // Use this for initialization
     void Start()
